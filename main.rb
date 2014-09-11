@@ -19,7 +19,7 @@ DELIVERY_ORDER = 32
 
 
 
-puts "---Cantina Ruby---"
+puts "-------Cantina Ruby---------"
 
 loop do
 
@@ -45,12 +45,28 @@ loop do
 			break if subMenu_code == EXIT
 
 			if subMenu_code+10 == REGISTER_PRODUCT
+				#Realizar a chamada construtor de Product para realizar a inclusão de um novo produto no sistema
+
+				system "clear" or system "cls"
 				puts "Registro de produtos"
+
+				puts "Nome do produto: "
+				name = gets.chomp
+				puts "Preço do produto"
+				value = gets.chomp
+
+				#chamada da função
+
+				puts "#{name} adicionado a Cantina"
 				puts "Pressione enter ..."
 				gets()
 			end
 
 			if subMenu_code+10 == STOCK_CONTROL
+				#Exibir uma lista com as informações dos produtos cadastrados (Nome, preço, quantidade em estoque)
+
+				#Oferecer opções de alterar essas informações (Alteração de nome, mudança de preço, compra de produtos etc)
+
 				puts "Controle de Estoque"
 				puts "Pressione enter ..."
 				gets()
@@ -73,18 +89,27 @@ loop do
 			break if subMenu_code == EXIT
 
 			if subMenu_code+20 == NEW_ORDER
+				#Iniciar uma nova instancia da classe Order, com um conjunto de Products, criar um ID desse pedido e setar o status do pedido para "aberto"
+
+
 				puts "Novo pedido"
 				puts "Pressione enter ..."
 				gets()
 			end
 
+			#Juntar as opções de editar e cancelar?
+
 			if subMenu_code+20 == EDIT_ORDER
+				#Listar os pedidos em aberto e permitir mudanças dentro desse pedido, desde que esse pedido ainda não tenha sido aceito pela cozinha.
+
 				puts "Alterar pedido"
 				puts "Pressione enter ..."
 				gets()
 			end
 
 			if subMenu_code+20 == CANCEL_ORDER
+				#Listar os pedidos em aberto, e fornecer a opção de cancelar esse pedido.
+
 				puts "Cancelar pedido"
 				puts "Pressione enter ..."
 				gets()
