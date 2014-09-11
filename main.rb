@@ -1,6 +1,58 @@
 require_relative 'Product.rb'
 
-#Constantes
+#Methods
+def main_menu
+	system "clear" or system "cls"
+	puts "-------Cantina Ruby---------"
+	puts "1 - Estoque"
+	puts "2 - Vendas"
+	puts "3 - Entregas"
+	puts "4 - Sair"
+end
+
+def main_menu_stock
+	system "clear" or system "cls"
+	puts "1 - Cadastro de Produtos"
+	puts "2 - Controle de Estoque"
+	puts "4 - Voltar"
+end
+
+def main_menu_sales
+	system "clear" or system "cls"
+	puts "1 - Fazer Pedido"
+	puts "2 - Alterar Pedido"
+	puts "3 - Cancelar Pedido"
+	puts "4 - Voltar"
+end
+
+def main_menu_deliver
+	system "clear" or system "cls"
+	puts "1 - Listar pedidos não entregues"
+	puts "2 - Entregar pedido"
+	puts "4 - Voltar"
+end
+
+
+def register_product
+	system "clear" or system "cls"
+		puts "-------Registro de produtos-------"
+		puts "Nome do produto: "
+		name = gets.chomp
+		puts "Preço do produto"
+		value = gets.chomp
+
+		product = Product.new(name, value)
+
+		puts "#{name} adicionado a Cantina"
+		puts "Pressione enter ..."
+		gets()
+
+		return product
+end
+
+
+
+#Constants
 STOCK = 1
 SALES = 2
 DELIVERY =3 
@@ -19,48 +71,32 @@ DELIVERY_ORDER = 32
 
 
 
-puts "-------Cantina Ruby---------"
+#Main
+products_list = Hash.new()
+$id_products = 1
 
 loop do
 
 	#Menu Cantina
-	puts "1 - Estoque"
-	puts "2 - Vendas"
-	puts "3 - Entregas"
-	puts "4 - Sair"
+	main_menu
 	
 	main_menu_code = gets.to_i
-	system "clear" or system "cls"
 	break if main_menu_code == EXIT
 
 	#Menu Estoque
 	if main_menu_code == STOCK
 		
 		loop do
-			puts "1 - Cadastro de Produtos"
-			puts "2 - Controle de Estoque"
-			puts "4 - Voltar"
+			main_menu_stock
 			subMenu_code = gets.to_i
-			system "clear" or system "cls"
 			break if subMenu_code == EXIT
 
 			if subMenu_code+10 == REGISTER_PRODUCT
 				#Realizar a chamada construtor de Product para realizar a inclusão de um novo produto no sistema
-
-				system "clear" or system "cls"
-				puts "Registro de produtos"
-
-				puts "Nome do produto: "
-				name = gets.chomp
-				puts "Preço do produto"
-				value = gets.chomp
-
-				#chamada da função
-
-				puts "#{name} adicionado a Cantina"
-				puts "Pressione enter ..."
-				gets()
+				products_list[$id_product] = register_product
+				$id_products += 1
 			end
+				
 
 			if subMenu_code+10 == STOCK_CONTROL
 				#Exibir uma lista com as informações dos produtos cadastrados (Nome, preço, quantidade em estoque)
@@ -72,20 +108,14 @@ loop do
 				gets()
 			end
 		end
-
-
 	end
 
 	#Menu Vendas
 	if main_menu_code == SALES
 		
 		loop do
-			puts "1 - Fazer Pedido"
-			puts "2 - Alterar Pedido"
-			puts "3 - Cancelar Pedido"
-			puts "4 - Voltar"
+			main_menu_sales
 			subMenu_code = gets.to_i
-			system "clear" or system "cls"
 			break if subMenu_code == EXIT
 
 			if subMenu_code+20 == NEW_ORDER
@@ -121,12 +151,8 @@ loop do
 	if main_menu_code == DELIVERY
 		
 		loop do
-
-			puts "1 - Listar pedidos não entregues"
-			puts "2 - Entregar pedido"
-			puts "4 - Voltar"
+			main_menu_deliver
 			subMenu_code = gets.to_i
-			system "clear" or system "cls"
 			break if subMenu_code == EXIT
 
 			if subMenu_code+30 == LIST_ORDERS
@@ -143,5 +169,3 @@ loop do
 		end
 	end
 end
-	
-	

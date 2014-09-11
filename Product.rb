@@ -8,11 +8,8 @@ class Product
 		@stock_quantity = 0
 	end
 
-	def initialize(name, price, stock_quantity)
-		@name = name
-		@price = price
-		@stock_quantity = stock_quantity
-	end
+	#Método para listar todos os produtos existentes
+	def list_products
 
-		
+	end
 end
