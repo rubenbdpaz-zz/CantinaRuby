@@ -98,8 +98,9 @@ loop do
 			break if subMenu_code == EXIT
 
 			if subMenu_code+10 == REGISTER_PRODUCT
-				$products_list[$id_product] = register_product
+				$products_list[$id_products] = register_product
 				$id_products += 1
+
 			end
 				
 
