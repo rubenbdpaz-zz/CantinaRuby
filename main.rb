@@ -50,6 +50,13 @@ def register_product
 		return product
 end
 
+def show_products
+	$products_list.each do |id, product| 
+		puts "#{product.name} - #{product.price} - #{product.stock_quantity}"
+	end
+end
+
+
 
 
 #Constants
@@ -72,14 +79,13 @@ DELIVERY_ORDER = 32
 
 
 #Main
-products_list = Hash.new()
+$products_list = Hash.new()
 $id_products = 1
 
 loop do
 
 	#Menu Cantina
 	main_menu
-	
 	main_menu_code = gets.to_i
 	break if main_menu_code == EXIT
 
@@ -92,18 +98,17 @@ loop do
 			break if subMenu_code == EXIT
 
 			if subMenu_code+10 == REGISTER_PRODUCT
-				#Realizar a chamada construtor de Product para realizar a inclusão de um novo produto no sistema
-				products_list[$id_product] = register_product
+				$products_list[$id_product] = register_product
 				$id_products += 1
 			end
 				
 
 			if subMenu_code+10 == STOCK_CONTROL
+				puts "-------Controle de Estoque-------"
 				#Exibir uma lista com as informações dos produtos cadastrados (Nome, preço, quantidade em estoque)
-
+				show_products
 				#Oferecer opções de alterar essas informações (Alteração de nome, mudança de preço, compra de produtos etc)
 
-				puts "Controle de Estoque"
 				puts "Pressione enter ..."
 				gets()
 			end
