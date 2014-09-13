@@ -1,6 +1,7 @@
-require_relative 'Product.rb'
+require_relative 'Product'
+require_relative 'Order'
 
-#Methods
+#Metodos
 def main_menu
 	system "clear" or system "cls"
 	puts "-------Cantina Ruby---------"
@@ -51,12 +52,30 @@ def register_product
 end
 
 def show_products
+	puts "Código | Nome do produto | Preço | Quantidade"
 	$products_list.each do |id, product| 
-		puts "#{product.name} - #{product.price} - #{product.stock_quantity}"
+		puts "#{id} | #{product.name} | R$#{product.price} | #{product.stock_quantity}"
 	end
 end
 
-
+def register_order
+	system "clear" or system "cls"
+	puts "-------Novo Pedido-------"
+	order = Order.new()
+	show_products
+	loop do
+		puts "Digite o código do produto a ser adicionado ao pedido. (0 para fechar o pedido)"
+		new_order_code = gets.chomp.to_i
+		break if new_order_code == 0
+		puts "Digite a quantidade"
+		new_order_quantity = gets.chomp.to_i
+		if new_order_quantity != 0
+			order.add_product($products_list[new_order_code],new_order_quantity)
+			puts "Produto adicionado com sucesso!"			
+		end
+	end
+	return order
+end
 
 
 #Constants
@@ -76,11 +95,11 @@ LIST_ORDERS = 31
 DELIVERY_ORDER = 32
 
 
-
-
 #Main
 $products_list = Hash.new()
 $id_products = 1
+$order_list = Hash.new()
+$id_orders = 1
 
 loop do
 
@@ -125,10 +144,19 @@ loop do
 			break if subMenu_code == EXIT
 
 			if subMenu_code+20 == NEW_ORDER
-				#Iniciar uma nova instancia da classe Order, com um conjunto de Products, criar um ID desse pedido e setar o status do pedido para "aberto"
+				#Iniciar uma nova instancia da classe Order
+					#Adicionar essa nova instancia numa Hash de Orders
 
+				$order_list[$id_orders] = register_order
+				$id_orders += 1
+				
+				#Listar produtos
+					#Chamar show_products
 
-				puts "Novo pedido"
+				#Incluir produtos em Order
+					#Pedir código do produto
+					#Perguntar se vai adicionar mais algum pedido
+				#Fechar a Order, mudando seu status
 				puts "Pressione enter ..."
 				gets()
 			end
